@@ -64,14 +64,14 @@ function App() {
           <main className="mx-auto max-w-7xl px-5 pb-20 pt-32 sm:px-6">
             <header className="mb-16 text-center sm:mb-20">
               <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.2em] text-[#6b38d4]">
-                Meet Your New Companions
+                Meet Our Scaler Instructors
               </span>
               <h1 className="font-display mx-auto mb-6 max-w-2xl text-4xl font-bold leading-tight text-[#191c1e] sm:text-5xl">
-                Digital empathy, tailored to your world.
+                Learn from industry experts, powered by AI.
               </h1>
               <p className="mx-auto max-w-xl text-base leading-8 text-[#464554]/80 sm:text-lg">
-                Experience human-like interaction with a range of AI personas
-                designed for depth, warmth, and intelligence.
+                Experience personalized guidance from world-class mentors.
+                Choose your instructor and start your learning journey today.
               </p>
             </header>
 
