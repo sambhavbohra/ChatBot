@@ -5,7 +5,7 @@ function SuggestionChips({ suggestions, onSelect }) {
         <button
           key={index}
           onClick={() => onSelect?.(item)}
-          className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700"
+          className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700"
         >
           {item}
         </button>

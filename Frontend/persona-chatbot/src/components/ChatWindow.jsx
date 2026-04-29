@@ -18,7 +18,7 @@ function ChatWindow({ messages, setMessages, loading, setLoading, activePersona,
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/chat", {
+      const res = await fetch("http://127.0.0.1:5001/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ function ChatWindow({ messages, setMessages, loading, setLoading, activePersona,
   };
 
   return (
-    <div className="flex min-h-[70vh] flex-col rounded-3xl border border-slate-200 bg-white shadow-lg">
+    <div className="flex min-h-[68vh] flex-col rounded-3xl border border-slate-200 bg-white shadow-lg">
       <div className="border-b border-slate-200 px-4 py-3 sm:px-6">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
           Chat
@@ -97,12 +97,12 @@ function ChatWindow({ messages, setMessages, loading, setLoading, activePersona,
           placeholder="Ask something..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100 sm:text-base"
+          className="w-full rounded-2xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-[#4648d4] focus:ring-4 focus:ring-indigo-100 sm:text-base"
         />
         <button
           type="submit"
           disabled={loading}
-          className="rounded-2xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-400 sm:text-base"
+          className="rounded-2xl bg-[#4648d4] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#383ab8] disabled:cursor-not-allowed disabled:bg-slate-400 sm:text-base"
         >
           {loading ? "Sending..." : "Send"}
         </button>

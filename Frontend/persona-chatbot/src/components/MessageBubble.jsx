@@ -6,7 +6,7 @@ function MessageBubble({ role, content }) {
       <div
         className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm sm:max-w-[75%] sm:text-base ${
           isUser
-            ? "rounded-br-md bg-blue-600 text-white"
+            ? "rounded-br-md bg-[#4648d4] text-white"
             : "rounded-bl-md bg-slate-100 text-slate-900"
         }`}
       >

@@ -5,9 +5,9 @@ function PersonaSwitcher({ personas, activePersona, onChange }) {
         <button
           key={persona.id}
           onClick={() => onChange(persona.id)}
-          className={`rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 sm:text-base ${
+          className={`rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 ${
             activePersona === persona.id
-              ? "bg-blue-600 text-white shadow-md"
+              ? "bg-[#4648d4] text-white shadow-md"
               : "bg-white text-slate-700 hover:bg-slate-200"
           }`}
         >
