@@ -11,8 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = Number(process.env.PORT || 5001);
-const HOST = process.env.HOST || "0.0.0.0";
+const HOST = process.env.RENDER ? "0.0.0.0" : process.env.HOST || "127.0.0.1";
 const MODEL = process.env.OPENAI_MODEL || "llama-3.3-70b-versatile";
+const MAX_HISTORY_MESSAGES = Number(process.env.MAX_HISTORY_MESSAGES || 8);
+const MAX_RESPONSE_TOKENS = Number(process.env.MAX_RESPONSE_TOKENS || 220);
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -38,6 +40,8 @@ app.get("/api/personas", (req, res) => {
 });
 
 app.post("/api/chat", async (req, res) => {
+  const startedAt = Date.now();
+
   try {
     const { persona = "anshuman", messages = [] } = req.body;
 
@@ -53,23 +57,45 @@ app.post("/api/chat", async (req, res) => {
       return res.status(500).json({ error: "Missing API key." });
     }
 
+    const recentMessages = messages
+      .slice(-MAX_HISTORY_MESSAGES)
+      .filter((message) => {
+        return (
+          message &&
+          ["user", "assistant"].includes(message.role) &&
+          typeof message.content === "string" &&
+          message.content.trim()
+        );
+      });
+
     const completion = await client.chat.completions.create({
       model: MODEL,
       messages: [
         { role: "system", content: personas[persona] },
-        ...messages,
+        ...recentMessages,
       ],
+      max_tokens: MAX_RESPONSE_TOKENS,
       temperature: 0.8,
     });
 
     const reply = completion.choices[0]?.message?.content || "No response generated.";
-    res.json({ reply, persona, model: MODEL });
+    const latencyMs = Date.now() - startedAt;
+
+    console.log("Chat completion finished:", {
+      persona,
+      model: MODEL,
+      latencyMs,
+      messages: recentMessages.length,
+    });
+
+    res.json({ reply, persona, model: MODEL, latencyMs });
   } catch (error) {
     console.error("Chat completion failed:", {
       message: error.message,
       status: error.status,
       code: error.code,
       type: error.type,
+      latencyMs: Date.now() - startedAt,
     });
 
     res.status(500).json({
