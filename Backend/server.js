@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = Number(process.env.PORT || 5001);
-const HOST = process.env.HOST || "127.0.0.1";
+const HOST = process.env.HOST || (process.env.RENDER ? "0.0.0.0" : "127.0.0.1");
 const MODEL = process.env.OPENAI_MODEL || "llama-3.3-70b-versatile";
 
 const client = new OpenAI({

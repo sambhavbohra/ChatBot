@@ -3,6 +3,8 @@ import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 import SuggestionChips from "./SuggestionChips";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:5001";
+
 function ChatWindow({ messages, setMessages, loading, setLoading, activePersona, suggestions }) {
   const [input, setInput] = useState("");
 
@@ -18,7 +20,7 @@ function ChatWindow({ messages, setMessages, loading, setLoading, activePersona,
     setLoading(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/chat", {
+      const res = await fetch(`${API_URL}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
