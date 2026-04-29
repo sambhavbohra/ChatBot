@@ -140,6 +140,15 @@ NODE_ENV=development
 - [ ] Response tone customization
 - [ ] Multi-language support
 
-## License
 
-MIT
+## Screenshots
+
+The `screenshots/` folder contains UI captures for the main views. Use these when writing docs or reviewing UI changes.
+
+- Landing / Main page: ![Main page](/screenshots/mainpage.png)
+- Persona: Anshuman (desktop): ![Anshuman](/screenshots/anshuman.png)
+- Persona: Kshitij (desktop): ![Kshitij](/screenshots/Kshitij.png)
+- Persona: Abhimanyu (desktop): ![Abhimanyu](/screenshots/Abhimanyu.png)
+- Follow-up / Reply example: ![Follow up](/screenshots/followup.png)
+
+
