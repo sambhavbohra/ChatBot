@@ -14,7 +14,9 @@ const PORT = Number(process.env.PORT || 5001);
 const HOST = process.env.RENDER ? "0.0.0.0" : process.env.HOST || "127.0.0.1";
 const MODEL = process.env.OPENAI_MODEL || "llama-3.3-70b-versatile";
 const MAX_HISTORY_MESSAGES = Number(process.env.MAX_HISTORY_MESSAGES || 8);
-const MAX_RESPONSE_TOKENS = Number(process.env.MAX_RESPONSE_TOKENS || 220);
+const MAX_RESPONSE_TOKENS = Number(process.env.MAX_RESPONSE_TOKENS || 1200);
+const GLOBAL_STYLE_PROMPT =
+  "Use markdown when it improves readability. Short headings, bullet points, numbered steps, and brief emphasis are allowed for any persona. Keep the response natural, concise, and useful.";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -71,7 +73,10 @@ app.post("/api/chat", async (req, res) => {
     const completion = await client.chat.completions.create({
       model: MODEL,
       messages: [
-        { role: "system", content: personas[persona] },
+        {
+          role: "system",
+          content: `${GLOBAL_STYLE_PROMPT}\n\n${personas[persona].bioPrompt}`,
+        },
         ...recentMessages,
       ],
       max_tokens: MAX_RESPONSE_TOKENS,
